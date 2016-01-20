@@ -1,0 +1,50 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle('SRMS | WU RECEIPT'); 
+	echo $this->headTitle();
+	$base_url = Application_Form_FrmMessage::getUrl("/");
+	$frm = $this->form;
+?>	
+<script type="text/javascript">
+	dojo.require("dojo.store.Memory");
+	dojo.require("dojo.data.ObjectStore");
+	dojo.require("dijit.Dialog");
+</script>
+<style>
+select{ width:100%;}
+fieldset{  background:none;}
+</style>
+<form id='receipt' action="<?php echo $this->url(array('module'=>'product','controller'=>'category','action'=>'edit')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
+<table  cellspacing="10" style="margin: 0 auto; width: 100%;" >
+	<tr>
+		<td>
+		<fieldset>
+					<legend align="center"><strong><?php echo $tr->translate("ADD_CATEGORY");?></strong></legend>
+					<table style="margin: 0 auto; width: 100%; " cellspacing="5">
+						<tr>
+							
+							<td><?php echo $tr->translate("PARENT");?> :</td>
+							<td><?php echo $frm->getElement('parent');?> </td>
+							<td><?php echo $tr->translate("CATEGORY");?> :</td>
+							<td><?php echo $frm->getElement('name');?></td>
+							<td><?php echo $tr->translate("SATATUS");?> :</td>
+							<td><?php echo $frm->getElement('status');?></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center">
+							<input type="button" value="Cancel" label="Cancel" id="cancel" name dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+								 
+							<input type="submit" value="save" label="Save" id="save_close" name="save" dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+								 
+							<input type="submit" value="save_new" label="Save New" id="save_new" name="save_news" dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>

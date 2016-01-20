@@ -1,0 +1,57 @@
+<?php
+	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
+	$this->headTitle('SRMS | WU RECEIPT'); 
+	echo $this->headTitle();
+	$base_url = Application_Form_FrmMessage::getUrl("/");
+	$frm = $this->form;
+	$row = $this->row;
+?>	
+<script type="text/javascript">
+	dojo.require("dojo.store.Memory");
+	dojo.require("dojo.data.ObjectStore");
+	dojo.require("dijit.Dialog");
+</script>
+<style>
+select{ width:100%;}
+fieldset{  background:none;}
+.table td,th {border: 1px solid #fff; border-collapse: collapse;}
+</style>
+<form id='receipt' action="<?php echo $this->url(array('module'=>'product','controller'=>'category','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
+<table  cellspacing="10" style="margin: 0 auto; width: 100%;" >
+	<tr>
+		<td>
+		<fieldset>
+					<legend align="center"><strong><?php echo $tr->translate("ADD_CATEGORY");?></strong></legend>
+					<table style="margin: 0 auto; width: 100%;" class="table" cellspacing="5">
+						<tr>
+							<th><?php echo $tr->translate("NO");?> :</th>
+							<th><?php echo $tr->translate("NAME");?> </th>
+							<th><?php echo $tr->translate("DATE");?> :</th>
+							<th><?php echo $tr->translate("STATUS");?></th>
+						</tr>
+						<?php if($row){ foreach ($row as $key=>$rs){?>
+							<tr>
+								<td><?php echo $key+1;?> :</td>
+								<td><a href="<?php echo $this->baseUrl();?>/product/brand/edit/id/<?php echo $rs["id"]?>"><?php echo $rs["name"];?></a> </td>
+								<td><?php echo $rs["date"];?> :</td>
+								<td><?php echo $rs["status"];?></td>
+							</tr>
+						<?php }}?>
+						<tr>
+							<td colspan="4" align="center">
+							<input type="button" value="Cancel" label="Cancel" id="cancel" name dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+								 
+							<input type="submit" value="save" label="Save" id="save_close" name="save" dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+								 
+							<input type="submit" value="save_new" label="Save New" id="save_new" name="save_news" dojoType="dijit.form.Button" 
+								 iconClass="dijitEditorIcon dijitEditorIconSave" />
+							</td>
+						</tr>
+					</table>	
+		</fieldset>		
+		</td>
+	</tr>
+</table>	
+</form>

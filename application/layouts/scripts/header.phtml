@@ -1,7 +1,7 @@
 <?php 
 	  $tr=Application_Form_FrmLanguages::getCurrentlanguage();
-	
 	  $home=$this->url(array('module'=>'home','controller'=>'index','action'=>'index'), null, true);
+	  $room=$this->url(array('module'=>'room','controller'=>'room','action'=>'index'), null, true);
 	  $registrar=$this->url(array('module'=>'registrar','controller'=>'Register','action'=>'index'), null, true);
 	  $foundation=$this->url(array('module'=>'foundation','controller'=>'index','action'=>'index'), null, true);
 	  $accounting=$this->url(array('module'=>'accounting','controller'=>'index','action'=>'index'), null, true);
@@ -20,7 +20,12 @@
 							<a title="ទំព័រដើម" href="'.$home.'">
 								<span>'.$tr->translate("ទំព័រដើម").'</span>
 							</a>
-						</li>',	  
+						</li>',	 
+	  	'room'=>'<li class="link">
+		  				<a title="ទំព័រដើម" href="'.$room.'">
+				  		<span>'.$tr->translate("បន្ទប់").'</span>
+				  		</a>
+		  		</li>',
 	  	'registrar'=>'<li class="link">
 						<a title="ការិ.ចុះឈ្មោះ" href="'.$registrar.'">
 							<span>'.$tr->translate("ការិ.ចុះឈ្មោះ").'</span>

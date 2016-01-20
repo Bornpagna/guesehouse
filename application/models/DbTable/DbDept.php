@@ -1,5 +1,5 @@
 <?php
-
+//
 class Application_Model_DbTable_DbDept extends Zend_Db_Table_Abstract
 {
 

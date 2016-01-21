@@ -1,14 +1,14 @@
 <?php
 
-class Product_Model_DbTable_DbBrand extends Zend_Db_Table_Abstract
+class Product_Model_DbTable_DbMeasure extends Zend_Db_Table_Abstract
 {
-    protected $_name = 'tb_brand';
+    protected $_name = 'tb_measure';
     public function getUserId(){
     	$session_user=new Zend_Session_Namespace('auth');
     	return $session_user->user_id;
     	 
     }
-	public function getBrand(){
+	public function getMeasure(){
 		$db = $this->getAdapter();
 		$sql="SELECT b.`id`,CONCAT(b.`name_en`,'-',b.`name_kh`) AS `name`,b.`date`,b.`status` FROM $this->_name AS b WHERE b.`status`=1";
 		$row = $db->fetchAll($sql);
@@ -16,9 +16,9 @@ class Product_Model_DbTable_DbBrand extends Zend_Db_Table_Abstract
 			return $row;
 		}
 	}
-	public function getBrandByID($id){
+	public function getMeasureByID($id){
 		$db = $this->getAdapter();
-		$sql="SELECT b.`id`,b.`name_en`,b.`name_kh`,b.`status`,b.`parent_id` FROM $this->_name AS b WHERE b.`id`=$id";
+		$sql="SELECT b.`id`,b.`name_en`,b.`name_kh`,b.`status` FROM $this->_name AS b WHERE b.`id`=$id";
 		$row = $db->fetchRow($sql);
 		if($row){
 			return $row;
@@ -27,7 +27,6 @@ class Product_Model_DbTable_DbBrand extends Zend_Db_Table_Abstract
 	public function add($data){
 		$db = $this->getAdapter();
 		$arr = array(
-			'parent_id'	=>	$data["parent"],
 			'name_en'		=>	$data["name_en"],
 			'name_kh'		=>	$data["name_kh"],
 			'date'		=>	new Zend_Date(),
@@ -38,7 +37,6 @@ class Product_Model_DbTable_DbBrand extends Zend_Db_Table_Abstract
 	public function edit($data,$id){
 		$db = $this->getAdapter();
 		$arr = array(
-			'parent_id'	=>	$data["parent"],
 			'name_en'		=>	$data["name_en"],
 			'name_kh'		=>	$data["name_kh"],
 			'date'		=>	new Zend_Date(),

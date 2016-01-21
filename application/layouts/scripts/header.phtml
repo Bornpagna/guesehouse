@@ -2,6 +2,7 @@
 	  $tr=Application_Form_FrmLanguages::getCurrentlanguage();
 	  $home=$this->url(array('module'=>'home','controller'=>'index','action'=>'index'), null, true);
 	  $room=$this->url(array('module'=>'room','controller'=>'room','action'=>'index'), null, true);
+	  $product=$this->url(array('module'=>'product','controller'=>'index','action'=>'index'), null, true);
 	  $registrar=$this->url(array('module'=>'registrar','controller'=>'Register','action'=>'index'), null, true);
 	  $foundation=$this->url(array('module'=>'foundation','controller'=>'index','action'=>'index'), null, true);
 	  $accounting=$this->url(array('module'=>'accounting','controller'=>'index','action'=>'index'), null, true);
@@ -24,6 +25,11 @@
 	  	'room'=>'<li class="link">
 		  				<a title="ទំព័រដើម" href="'.$room.'">
 				  		<span>'.$tr->translate("បន្ទប់").'</span>
+				  		</a>
+		  		</li>',	 
+	  	'product'=>'<li class="link">
+		  				<a title="Produc" href="'.$product.'">
+				  		<span>'.$tr->translate("ផលិតផល").'</span>
 				  		</a>
 		  		</li>',
 	  	'registrar'=>'<li class="link">

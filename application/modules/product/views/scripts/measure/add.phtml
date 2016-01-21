@@ -14,7 +14,7 @@
 select{ width:100%;}
 fieldset{  background:none;}
 </style>
-<form id='receipt' action="<?php echo $this->url(array('module'=>'product','controller'=>'index','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
+<form id='receipt' action="<?php echo $this->url(array('module'=>'product','controller'=>'measure','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post" enctype="application/x-www-form-urlencoded">
 <table  cellspacing="10" style="margin: 0 auto; width: 100%;" >
 	<tr>
 		<td>
@@ -22,33 +22,12 @@ fieldset{  background:none;}
 					<legend align="center"><strong><?php echo $tr->translate("ADD_BRAND");?></strong></legend>
 					<table style="margin: 0 auto; width: 100%; " cellspacing="5">
 						<tr>
-							<td></td>
-							<td></td>
-							<td><?php echo $tr->translate("CODE");?> :</td>
-							<td><?php echo $frm->getElement('code');?></td>
-						</tr>
-						<tr>
+							
 							<td><?php echo $tr->translate("NAME_EN");?> :</td>
 							<td><?php echo $frm->getElement('name_en');?></td>
 							<td><?php echo $tr->translate("NAME_KH");?> :</td>
 							<td><?php echo $frm->getElement('name_kh');?></td>
-						</tr>
-						<tr>
-							<td><?php echo $tr->translate("BRAND");?> :</td>
-							<td><?php echo $frm->getElement('brand');?></td>
-							<td><?php echo $tr->translate("CATEGORY");?> :</td>
-							<td><?php echo $frm->getElement('category');?></td>
-						</tr>
-						<tr>
-							<td><?php echo $tr->translate("MEASURE");?> :</td>
-							<td><?php echo $frm->getElement('measure');?></td>
-							<td><?php echo $tr->translate("SIZE");?> :</td>
-							<td><?php echo $frm->getElement('pro_size');?></td>
-						</tr>
-						<tr>
-							<td><?php echo $tr->translate("QTY");?> :</td>
-							<td><?php echo $frm->getElement('qty_onhand');?></td>
-							<td><?php echo $tr->translate("STATUS");?> :</td>
+							<td><?php echo $tr->translate("SATATUS");?> :</td>
 							<td><?php echo $frm->getElement('status');?></td>
 						</tr>
 						<tr>

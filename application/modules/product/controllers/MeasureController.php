@@ -1,9 +1,9 @@
 <?php
-class Product_BrandController extends Zend_Controller_Action {
+class Product_MeasureController extends Zend_Controller_Action {
 	
 	
 	protected $tr;
-	const REDIRECT_URL ='/product';
+	const REDIRECT_URL ='/category';
     public function init()
     {    	
     	header('content-type: text/html; charset=utf8');
@@ -13,8 +13,8 @@ class Product_BrandController extends Zend_Controller_Action {
 
     public function indexAction()
     {
-    	$db = new Product_Model_DbTable_DbBrand();
-    	$rs_rows = $db->getBrand();
+    	$db = new Product_Model_DbTable_DbMeasure();
+    	$rs_rows = $db->getMeasure();
     	$glClass = new Application_Model_GlobalClass();
     	$rs_rows = $glClass->getImgActive($rs_rows, BASE_URL, true);
     	$list = new Application_Form_Frmtable();
@@ -26,37 +26,37 @@ class Product_BrandController extends Zend_Controller_Action {
     }
     public function addAction()
     {
-    	$db = new Product_Model_DbTable_DbBrand();
+    	$db = new Product_Model_DbTable_DbMeasure();
     	if($this->getRequest()->isPost()){
     		$data = $this->getRequest()->getPost();
     		$db->add($data);
     		if(isset($data["save_new"])){
-    			Application_Form_FrmMessage::Sucessfull("Insert was Success!", "/product/category/add");
+    			Application_Form_FrmMessage::Sucessfull("Insert was Success!", "/product/measure/add");
     		}
     		
     	}
-    	$frm = new Product_Form_FrmBrand();
-    	$frm=$frm->FrmBrand();
+    	$frm = new Product_Form_FrmMeasure();
+    	$frm=$frm->FrmMeasure();
     	Application_Model_Decorator::removeAllDecorator($frm);
     	$this->view->form = $frm;
     }
     
     public function editAction(){
     	$id = $this->getRequest()->getParam("id");
-    	$db = new Product_Model_DbTable_DbBrand();
-    	$row = $db->getBrandByID($id);
+    	$db = new Product_Model_DbTable_DbMeasure();
+    	$row = $db->getMeasureByID($id);
     	if($this->getRequest()->isPost()){
     		$data = $this->getRequest()->getPost();
     		$db->edit($data, $id);
     		if(isset($data["save_new"])){
-    			Application_Form_FrmMessage::Sucessfull("Category was updateed!", "/product/category/add");
+    			Application_Form_FrmMessage::Sucessfull("Measure was updateed!", "/product/measure/add");
     		}else{
-    			Application_Form_FrmMessage::Sucessfull("Category was updateed!", "/product/category");
+    			Application_Form_FrmMessage::Sucessfull("Measure was updateed!", "/product/measure");
     		}
     	}
     	
-    	$frm = new Product_Form_FrmBrand();
-    	$frm=$frm->FrmBrand($row);
+    	$frm = new Product_Form_FrmMeasure();
+    	$frm=$frm->FrmMeasure($row);
     	Application_Model_Decorator::removeAllDecorator($frm);
     	$this->view->form = $frm;
     }

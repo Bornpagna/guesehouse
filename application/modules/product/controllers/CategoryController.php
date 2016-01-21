@@ -2,18 +2,27 @@
 class Product_CategoryController extends Zend_Controller_Action {
 	
 	
+	protected $tr;
+	const REDIRECT_URL ='/category';
     public function init()
     {    	
-     /* Initialize action controller here */
     	header('content-type: text/html; charset=utf8');
-    	
+    	$this->tr=Application_Form_FrmLanguages::getCurrentlanguage();
+    	defined('BASE_URL')	|| define('BASE_URL', Zend_Controller_Front::getInstance()->getBaseUrl());
 	}
 
     public function indexAction()
     {
     	$db = new Product_Model_DbTable_DbCategory();
-    	$row = $db->getCategory();
-    	$this->view->row = $row;
+    	$rs_rows = $db->getCategory();
+    	$glClass = new Application_Model_GlobalClass();
+    	$rs_rows = $glClass->getImgActive($rs_rows, BASE_URL, true);
+    	$list = new Application_Form_Frmtable();
+    	$collumns = array("NAME","DATE","STATUS");
+    	$link=array(
+    			'module'=>'product','controller'=>'index','action'=>'edit',
+    	);
+    	$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('name'=>$link));
     }
     public function addAction()
     {

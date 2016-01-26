@@ -1,8 +1,8 @@
+<title>Room Type</title>
 <?php
 	$tr = Application_Form_FrmLanguages::getCurrentlanguage();
 	//echo $this->headTitle($tr->translate('ADD_HOLIDAY'));
 ?>	
-<title><?php echo $tr->translate("FLOOR");?></title>
 <?php  $holiday= $this->frm_holiday;?>
 <script>
 dojo.require("dijit.form.NumberTextBox");
@@ -11,7 +11,7 @@ dojo.require("dojo.data.ItemFileWriteStore");
 dojo.require("dijit.form.DateTextBox");
 require(["dijit/form/CheckBox","dijit/Dialog","dijit/layout/TabContainer"]);
 </script>
-<form  id='add_techer' action="<?php echo $this->url(array('module'=>'room','controller'=>'floor','action'=>'edit')); ?>" dojoType="dijit.form.Form" method="post"
+<form  id='add_techer' action="<?php echo $this->url(array('module'=>'room','controller'=>'index','action'=>'add')); ?>" dojoType="dijit.form.Form" method="post"
  enctype="application/x-www-form-urlencoded">
  <script type="dojo/method" event="onSubmit">			
 			if(this.validate()) {
@@ -24,12 +24,11 @@ require(["dijit/form/CheckBox","dijit/Dialog","dijit/layout/TabContainer"]);
 	<tr>
 		<td>
 		<fieldset>
-					<legend align="center" ><strong><?php echo $tr->translate("FLOOR");?></strong></legend>
+					<legend align="center" ><strong><?php echo $tr->translate("ROOM_TYPE");?></strong></legend>
 					<table style="margin: 0 auto; width: 95%;" cellspacing="10">
 						<tr>
-							<td><?php echo $tr->translate("FLOOR_NAME")?></td>
-							<td><input type="hidden" name="id" id="id" value="<?php echo $this->floor['id'];?>" />
-							<input dojoType="dijit.form.ValidationTextBox" class="fullside" required="true" id="floor_name" name="floor_name" value="<?php echo $this->floor['floor_name'];?>" type="text"></td>
+							<td><?php echo $tr->translate("ROOM_TYPE")?></td>
+							<td><input dojoType="dijit.form.ValidationTextBox" class="fullside" required="true" id="room_type" name="room_type" value="" type="text"></td>
 						</tr>
 						<tr>
 							<td><?php echo $tr->translate("STATUS")?></td>
@@ -41,7 +40,10 @@ require(["dijit/form/CheckBox","dijit/Dialog","dijit/layout/TabContainer"]);
 						</tr>
 						<tr>
 							<td colspan="4" align="center">
+									<input type="reset" value="សំអាត" label="<?php echo $tr->translate('CLEAR');?>"dojoType="dijit.form.Button" iconClass="dijitIconClear"/>
 									<input type="submit" value="save_close" name="save_close" label="<?php echo $tr->translate('SAVECLOSE');?>" dojoType="dijit.form.Button" 
+										iconClass="dijitEditorIcon dijitEditorIconSave" />
+									<input type="submit" value="save_new" name="save_new" label="<?php echo $tr->translate('SAVENEW');?>" dojoType="dijit.form.Button" 
 										iconClass="dijitEditorIcon dijitEditorIconSave" />
 							</td>
 						</tr>

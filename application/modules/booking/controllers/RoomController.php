@@ -1,5 +1,5 @@
 <?php
-class Room_RoomController extends Zend_Controller_Action {
+class Booking_RoomController extends Zend_Controller_Action {
 	protected $tr;
 	const REDIRECT_URL ='/room';
     public function init()

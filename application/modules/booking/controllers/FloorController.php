@@ -1,5 +1,5 @@
 <?php
-class Room_RoomController extends Zend_Controller_Action {
+class Booking_FloorController extends Zend_Controller_Action {
 	protected $tr;
 	const REDIRECT_URL ='/room';
     public function init()
@@ -12,7 +12,7 @@ class Room_RoomController extends Zend_Controller_Action {
     public function indexAction()
     {
     	try{
-    		$db = new Room_Model_DbTable_DbRoom();
+    		$db = new Room_Model_DbTable_DbFloor();
 //     		if($this->getRequest()->isPost()){
 //     			$search=$this->getRequest()->getPost();
 //     		}
@@ -23,15 +23,15 @@ class Room_RoomController extends Zend_Controller_Action {
 //     					'start_date'=> date('Y-m-01'),
 //     					'end_date'=>date('Y-m-d'));
 //     		}
-    		$rs_rows= $db->getAllRoom();
+    		$rs_rows= $db->getAllFloor();
     		$glClass = new Application_Model_GlobalClass();
     		$rs_rows = $glClass->getImgActive($rs_rows, BASE_URL, true);
     		$list = new Application_Form_Frmtable();
-    		$collumns = array("ROOM_NO","ROOM_NUMBER","ROOM_TYPE","FLOOR_NAME","DATE","BED_NUMBER","DESCRIPTION","STATUS");
+    		$collumns = array("FLOOR_NAME","STATUS");
     		$link=array(
-    				'module'=>'room','controller'=>'room','action'=>'edit',
+    				'module'=>'room','controller'=>'floor','action'=>'edit',
     		);
-    		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('room_no'=>$link,'room_number'=>$link,'type_id'=>$link,'floor_id'=>$link,'date'=>$link));
+    		$this->view->list=$list->getCheckList(0, $collumns, $rs_rows,array('floor_name'=>$link));
     	}catch (Exception $e){
     		Application_Form_FrmMessage::message("Application Error");
     		Application_Model_DbTable_DbUserLog::writeMessageError($e->getMessage());
@@ -42,13 +42,13 @@ class Room_RoomController extends Zend_Controller_Action {
     	if($this->getRequest()->isPost()){
     		$_data = $this->getRequest()->getPost();
     		try {
-    			$db = new Room_Model_DbTable_DbRoom();
-    			if(isset($_data['save_new'])){
-    				$db->addRooom($_data);
+    			$db = new Room_Model_DbTable_DbFloor();
+    			if(!empty($_data['save_new'])){
+    				$db->addFloor($_data);
     				Application_Form_FrmMessage::message($this->tr->translate('INSERT_SUCCESS'));
     			}else{
-    				$db->addRooom($_data);
-    				Application_Form_FrmMessage::Sucessfull($this->tr->translate('INSERT_SUCCESS'), self::REDIRECT_URL . '/room/index');
+    				$db->addFloor($_data);
+    				Application_Form_FrmMessage::Sucessfull($this->tr->translate('INSERT_SUCCESS'), self::REDIRECT_URL . '/floor/index');
     			}
     		} catch (Exception $e) {
     			Application_Form_FrmMessage::message($this->tr->translate('INSERT_FAIL'));
@@ -56,22 +56,16 @@ class Room_RoomController extends Zend_Controller_Action {
     			Application_Model_DbTable_DbUserLog::writeMessageError($err);
     		}
     	}
-    	$room_type=new Room_Model_DbTable_DbRoom();
-    	$this->view->all_type=$room_type->getAllRoomType();
-    	$this->view->all_floor=$room_type->getAllFloor();
     }
-    public function editAction(){
-    	$id=$this->getRequest()->getParam('id');
-    	$db=new Room_Model_DbTable_DbRoom();
-    	$this->view->row_room=$db->getRoomById($id);
+    public function editAction()
+    {
     	if($this->getRequest()->isPost()){
     		$_data = $this->getRequest()->getPost();
-    		$_data['id']=$id;
     		try {
-    			$db = new Room_Model_DbTable_DbRoom();
-    			if(isset($_data['save_close'])){
-    				$db->updateRooom($_data);
-    				Application_Form_FrmMessage::Sucessfull($this->tr->translate('INSERT_SUCCESS'), self::REDIRECT_URL . '/room/index');
+    			$db = new Room_Model_DbTable_DbFloor();
+    			if(!empty($_data['save_close'])){
+    				$db->updateFloor($_data);
+    				Application_Form_FrmMessage::Sucessfull($this->tr->translate('INSERT_SUCCESS'), self::REDIRECT_URL . '/floor/index');
     			}
     		} catch (Exception $e) {
     			Application_Form_FrmMessage::message($this->tr->translate('INSERT_FAIL'));
@@ -79,17 +73,8 @@ class Room_RoomController extends Zend_Controller_Action {
     			Application_Model_DbTable_DbUserLog::writeMessageError($err);
     		}
     	}
-    	$room_type=new Room_Model_DbTable_DbRoom();
-    	$this->view->all_type=$room_type->getAllRoomType();
-    	$this->view->all_floor=$room_type->getAllFloor();
+    	$db = new Room_Model_DbTable_DbFloor();
+    	$id=$this->getRequest()->getParam('id');
+    	$row=$this->view->floor=$db->getFloorById($id);
     }
-    
-	function itemAction()
-	{
-		$item= new Accounting_Form_Frmitem();
-		$frm_item=$item->Frmitem();
-		Application_Model_Decorator::removeAllDecorator($frm_item);
-		$this->view->frm_item = $frm_item;
-	}	
-   
 }
